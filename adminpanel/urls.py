@@ -3,7 +3,9 @@ from .views import (
     dashboard,
     recent_appointments,
     all_appointments,
-    all_doctors
+    all_doctors,
+    admin_profile,
+    settings
 )
 urlpatterns = [
 
@@ -24,5 +26,16 @@ urlpatterns = [
     "all-doctors/",
     all_doctors
 ),
+    path(
+        "profile/",
+        admin_profile
+    ),
+
+    path(
+        "settings/",
+        settings
+    ),
+
+
 
 ]
