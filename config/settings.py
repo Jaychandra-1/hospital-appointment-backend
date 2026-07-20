@@ -86,12 +86,23 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
-DATABASES = {
-    "default": dj_database_url.config(
-        default=os.environ.get("DATABASE_URL")
-    )
-}
+if os.environ.get("DATABASE_URL"):
+    DATABASES = {
+        "default": dj_database_url.config(
+            default=os.environ.get("DATABASE_URL")
+        )
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            "NAME": "hospital_db",
+            "USER": "root",
+            "PASSWORD": "Jaya@123",
+            "HOST": "127.0.0.1",
+            "PORT": "3306",
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -128,8 +139,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
-CORS_ALLOW_ALL_ORIGINS = True# Razorpay Configuration
-# Razorpay Test Keys
+CORS_ALLOW_ALL_ORIGINS = True
+
+# Razorpay Configuration
 RAZORPAY_KEY_ID = "rzp_test_T7wUm2BPn0vhIB"
 RAZORPAY_KEY_SECRET = "CvjhkVfgnIgTl1YX9oE4uMPn"
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
