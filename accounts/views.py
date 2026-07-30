@@ -204,3 +204,21 @@ def dashboard_counts(request, patient_name):
         "notifications": notifications,
         "reviews": reviews
     })
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+
+def create_admin(request):
+    username = "jaya"
+    email = "cjaya8555@gmail.com"
+    password = "JayaAdmin@123"
+
+    if User.objects.filter(username=username).exists():
+        return HttpResponse("Superuser already exists.")
+
+    User.objects.create_superuser(
+        username=username,
+        email=email,
+        password=password,
+    )
+
+    return HttpResponse("Superuser created successfully!")

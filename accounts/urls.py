@@ -6,7 +6,8 @@ from .views import (
     forgot_password,
     verify_otp,
     reset_password,
-    dashboard_counts
+    dashboard_counts,
+    create_admin
 )
 
 router = DefaultRouter()
@@ -28,6 +29,7 @@ urlpatterns = [
     "dashboard/<str:patient_name>/",
     dashboard_counts
     ),
+    path("create-admin/", create_admin),
     
 
 ]

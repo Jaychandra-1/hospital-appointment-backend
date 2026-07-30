@@ -91,6 +91,7 @@ DATABASES = {
     "default": dj_database_url.config(
         default="postgresql://postgres:Jaya%40123@localhost:5432/hospital_db",
         conn_max_age=600,
+        ssl_require=False,
     )
 }
 # Password validation
