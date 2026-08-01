@@ -37,5 +37,4 @@ urlpatterns = [
 
     path("api/admin/", include("adminpanel.urls")),
 
-    path("create-admin/", create_admin),
 ]
