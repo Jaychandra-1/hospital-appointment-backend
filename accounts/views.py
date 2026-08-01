@@ -209,16 +209,20 @@ from django.http import HttpResponse
 
 def create_admin(request):
     username = "jaya"
-    email = "cjaya8555@gmail.com"
-    password = "JayaAdmin@123"
 
-    if User.objects.filter(username=username).exists():
-        return HttpResponse("Superuser already exists.")
-
-    User.objects.create_superuser(
+    user, created = User.objects.get_or_create(
         username=username,
-        email=email,
-        password=password,
+        defaults={
+            "email": "cjaya8555@gmail.com"
+        }
     )
 
-    return HttpResponse("Superuser created successfully!")
+    # Always make sure the user is an admin
+    user.is_staff = True
+    user.is_superuser = True
+
+    # Reset the password every time this URL is visited
+    user.set_password("JayaAdmin@123")
+    user.save()
+
+    return HttpResponse("Password reset successfully!")
