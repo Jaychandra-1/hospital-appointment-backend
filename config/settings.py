@@ -151,3 +151,9 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = BASE_DIR / "media"
+
+# CORS Settings
+CORS_ALLOW_ALL_ORIGINS = True
+
+# Allow cookies/auth headers if needed
+CORS_ALLOW_CREDENTIALS = True
