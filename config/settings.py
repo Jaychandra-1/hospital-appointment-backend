@@ -133,8 +133,8 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"# Razorpay Configuration
 # Razorpay Test Keys
-RAZORPAY_KEY_ID = "rzp_test_T7wUm2BPn0vhIB"
-RAZORPAY_KEY_SECRET = "CvjhkVfgnIgTl1YX9oE4uMPn"
+RAZORPAY_KEY_ID = "rzp_test_TN81TBpK0JsRvK"
+RAZORPAY_KEY_SECRET = "8wmmtR7rJSzpG1M5zecxnSXv"
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 EMAIL_HOST = "smtp.gmail.com"
