@@ -11,21 +11,34 @@ client = razorpay.Client(
         settings.RAZORPAY_KEY_SECRET
     )
 )
-
 @api_view(["POST"])
 def create_order(request):
-    print("RAZORPAY KEY ID EXISTS:", bool(settings.RAZORPAY_KEY_ID))
-    print("RAZORPAY SECRET EXISTS:", bool(settings.RAZORPAY_KEY_SECRET))
-    amount = request.data.get("amount")
+    try:
+        amount = request.data.get("amount")
 
-    order = client.order.create({
-        "amount": int(amount) * 100,
-        "currency": "INR",
-        "payment_capture": 1
-    })
+        if not amount:
+            return Response(
+                {"error": "Amount is required"},
+                status=400
+            )
 
-    return Response({
-        "key": settings.RAZORPAY_KEY_ID,
-        "amount": order["amount"],
-        "order_id": order["id"]
-    })
+        amount_paise = int(amount) * 100
+
+        order = client.order.create({
+            "amount": amount_paise,
+            "currency": "INR",
+            "payment_capture": 1
+        })
+
+        return Response({
+            "key": settings.RAZORPAY_KEY_ID,
+            "amount": order["amount"],
+            "order_id": order["id"]
+        })
+
+    except Exception as e:
+        print("RAZORPAY ORDER ERROR:", repr(e))
+        return Response(
+            {"error": str(e)},
+            status=500
+        )
