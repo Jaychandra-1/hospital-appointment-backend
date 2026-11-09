@@ -14,6 +14,8 @@ client = razorpay.Client(
 
 @api_view(["POST"])
 def create_order(request):
+    print("RAZORPAY KEY ID EXISTS:", bool(settings.RAZORPAY_KEY_ID))
+    print("RAZORPAY SECRET EXISTS:", bool(settings.RAZORPAY_KEY_SECRET))
     amount = request.data.get("amount")
 
     order = client.order.create({
